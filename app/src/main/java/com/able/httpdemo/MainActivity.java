@@ -1,8 +1,12 @@
 package com.able.httpdemo;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -20,13 +24,35 @@ public class MainActivity extends AppCompatActivity {
 
     //聚合数据
     String appkey = "e201160722b2f9f7e11d45a2e9958037";
+    String url="http://v.juhe.cn/todayOnhistory/queryEvent.php?date=1/1&key=e201160722b2f9f7e11d45a2e9958037";
 
     private static final String TAG = "MainActivity";
+    private Handler handler=new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button mBtnRetrofit = findViewById(R.id.btn_retrofit_request);
+        Button mBtnHttpConnection = findViewById(R.id.btn_httpConnection_request);
+        final TextView mTvContent = findViewById(R.id.tv_content);
+
+        mBtnRetrofit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                retrofitRequest();
+            }
+        });
+        mBtnHttpConnection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               new HttpConnectionThread(handler,mTvContent,url).start();
+            }
+        });
+
+    }
+
+    private void retrofitRequest() {
         //步骤4：创建Retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://v.juhe.cn/todayOnhistory/") // 设置 网络请求 Url
