@@ -16,6 +16,17 @@
         android:text="httpConnection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_okhttp"
+        android:text="okhttp_get"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_okhttp_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="okhttp_post"
+        />
     <TextView
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
